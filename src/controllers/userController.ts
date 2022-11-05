@@ -11,7 +11,9 @@ export const signUp = async (req: Request, res: Response) => {
 
     if (email.length > 0 && password.length > 0) {
         let hasUser = await User.findOne({ where: { email } });
+
         if (hasUser) { res.json({ error: 'Não foi possível cadastrar, email já existe.' }); return; }
+
         if (!hasUser) {
             let newUser = await User.create({ email, password, isAdmin });
 
